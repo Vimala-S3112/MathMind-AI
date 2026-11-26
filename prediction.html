@@ -1,0 +1,595 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MathMind AI - Performance Prediction</title>
+<link rel="stylesheet" href="style.css"><style>
+.prediction-container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.back-button {
+    display: inline-block;
+    background: #49329a;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+.page-heading {
+    background: linear-gradient(120deg, #292b83, #7138a8);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.info-box, .formula-box, .student-box, .result-box,
+.table-box, .chart-box {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 15px #00000015;
+}
+
+h3 {
+    color: #49329a;
+    margin-bottom: 18px;
+}
+
+.info-box {
+    text-align: center;
+    color: #555;
+    line-height: 1.8;
+}
+
+.formula {
+    background: #eeeaff;
+    color: #49329a;
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 21px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.formula-details {
+    line-height: 2;
+    color: #555;
+}
+
+.student-select {
+    width: 100%;
+    padding: 13px;
+    border: 2px solid #c5b5ed;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.student-details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-card {
+    background: #eeeaff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+}
+
+.detail-card h4 {
+    color: #49329a;
+    margin-bottom: 10px;
+}
+
+.detail-card p {
+    font-size: 23px;
+    font-weight: bold;
+    color: #7138a8;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.result-card {
+    background: linear-gradient(120deg, #eeeaff, #f7f3ff);
+    padding: 22px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.result-card h4 {
+    color: #49329a;
+    margin-bottom: 12px;
+}
+
+.result-card p {
+    color: #7138a8;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.status {
+    display: inline-block;
+    padding: 7px 15px;
+    border-radius: 20px;
+    background: #e5dcff;
+    color: #49329a;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 650px;
+}
+
+.table-box {
+    overflow-x: auto;
+}
+
+th {
+    background: #49329a;
+    color: white;
+    padding: 15px;
+}
+
+td {
+    padding: 13px;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody tr:hover {
+    background: #eeeaff;
+}
+
+.chart-area {
+    min-height: 350px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    gap: 15px;
+    border-left: 2px solid #ddd;
+    border-bottom: 2px solid #ddd;
+}
+
+.bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    height: 300px;
+    gap: 8px;
+}
+
+.bar {
+    width: 65%;
+    max-width: 75px;
+    min-height: 5px;
+    border-radius: 8px 8px 0 0;
+}
+
+.bar-value {
+    font-weight: bold;
+    color: #49329a;
+    font-size: 13px;
+}
+
+.bar-label {
+    color: #555;
+    font-size: 13px;
+    text-align: center;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+    margin-top: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #555;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.pie-layout {
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 35px;
+    flex-wrap: wrap;
+}
+
+.pie-chart {
+    width: 230px;
+    height: 230px;
+    border-radius: 50%;
+}
+
+@media(max-width: 650px) {
+    .student-details, .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-area {
+        gap: 5px;
+        padding: 10px;
+    }
+
+    .bar-label {
+        font-size: 10px;
+    }
+
+    .pie-layout {
+        flex-direction: column;
+    }
+}
+</style></head><body><header class="main-header">
+    <h1>🧠 MathMind AI</h1>
+    <p>Student Performance Prediction Website</p>
+</header><main class="prediction-container"><a href="index.html" class="back-button">⬅ Back to Main Menu</a>
+
+<div class="page-heading">
+    <h2>🔮 Student Performance Prediction</h2>
+    <p>AI-Based Student Performance Analysis and Prediction</p>
+</div><section class="info-box">
+    <h3>About Performance Prediction</h3>
+    <p>
+        This section predicts student performance using existing
+        student records. The prediction is calculated using previous
+        marks, attendance and current marks. Select a student to
+        view the predicted result and performance graphs.
+    </p>
+</section><section class="formula-box">
+    <h3>📐 Prediction Formula</h3><div class="formula">
+    Predicted Score = (Previous Marks × 0.4)
+    + (Attendance × 0.2)
+    + (Current Marks × 0.4)
+</div>
+
+<div class="formula-details">
+    <p><b>Previous Marks:</b> Previous academic performance.</p>
+    <p><b>Attendance:</b> Student attendance percentage.</p>
+    <p><b>Current Marks:</b> Current examination marks.</p>
+    <p><b>0.4, 0.2, 0.4:</b> Weights assigned to each factor.</p>
+</div>
+
+</section><section class="student-box">
+    <h3>Student Performance Details</h3>
+    <label for="studentSelect">Select Student:</label><select id="studentSelect" class="student-select"></select>
+
+<div class="student-details">
+    <div class="detail-card">
+        <h4>Previous Marks</h4>
+        <p id="previousMarks"></p>
+    </div>
+
+    <div class="detail-card">
+        <h4>Attendance</h4>
+        <p id="attendance"></p>
+    </div>
+
+    <div class="detail-card">
+        <h4>Current Marks</h4>
+        <p id="currentMarks"></p>
+    </div>
+</div>
+
+</section><section class="result-box">
+    <h3>🎯 AI Prediction Result</h3><div class="result-grid">
+    <div class="result-card">
+        <h4>Predicted Marks</h4>
+        <p id="predictedMarks"></p>
+    </div>
+
+    <div class="result-card">
+        <h4>Performance Level</h4>
+        <p id="performanceLevel"></p>
+    </div>
+
+    <div class="result-card">
+        <h4>Prediction Status</h4>
+        <p><span class="status" id="predictionStatus">Completed</span></p>
+    </div>
+</div>
+
+</section><section class="chart-box">
+    <h3 id="individualTitle">Individual Prediction Graph</h3>
+    <div class="chart-area" id="individualChart"></div><div class="legend">
+    <div class="legend-item">
+        <span class="legend-color" style="background:#49329a"></span>
+        Actual Marks
+    </div>
+    <div class="legend-item">
+        <span class="legend-color" style="background:#9370db"></span>
+        Predicted Marks
+    </div>
+</div>
+
+</section><section class="table-box">
+    <h3>All Students Prediction Results</h3><table>
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Student Name</th>
+            <th>Previous Marks</th>
+            <th>Attendance</th>
+            <th>Current Marks</th>
+            <th>Predicted Marks</th>
+            <th>Performance</th>
+        </tr>
+    </thead>
+    <tbody id="predictionTable"></tbody>
+</table>
+
+</section><section class="chart-box">
+    <h3>Actual Marks vs Predicted Marks</h3>
+    <div class="chart-area" id="comparisonChart"></div><div class="legend">
+    <div class="legend-item">
+        <span class="legend-color" style="background:#49329a"></span>
+        Actual Marks
+    </div>
+    <div class="legend-item">
+        <span class="legend-color" style="background:#9370db"></span>
+        Predicted Marks
+    </div>
+</div>
+
+</section><section class="chart-box">
+    <h3>Performance Distribution</h3><div class="pie-layout">
+    <div class="pie-chart" id="performancePie"></div>
+    <div class="legend" id="pieLegend"></div>
+</div>
+
+</section><section class="info-box">
+    <h3>Prediction Note</h3>
+    <p>
+        The results shown are sample predictions calculated using
+        the displayed weighted formula and sample student records.
+        They are intended for academic demonstration and do not
+        represent guaranteed future examination marks.
+    </p>
+</section></main><footer>
+    <p>© 2026 MathMind AI | Student Performance Prediction</p>
+</footer><script>
+
+const students = [
+    { sno: 1, name: "Arun", previous: 80, attendance: 95, current: 85 },
+    { sno: 2, name: "Bala", previous: 90, attendance: 98, current: 92 },
+    { sno: 3, name: "Divya", previous: 65, attendance: 75, current: 68 },
+    { sno: 4, name: "Kavi", previous: 75, attendance: 85, current: 78 },
+    { sno: 5, name: "Meena", previous: 50, attendance: 60, current: 55 },
+    { sno: 6, name: "Priya", previous: 85, attendance: 92, current: 88 },
+    { sno: 7, name: "Ravi", previous: 70, attendance: 78, current: 72 }
+];
+
+// Prediction calculation
+function calculatePrediction(student) {
+
+    return (
+        student.previous * 0.4 +
+        student.attendance * 0.2 +
+        student.current * 0.4
+    );
+}
+
+// Performance classification
+function getPerformance(score) {
+
+    if (score >= 85) return "Excellent";
+    if (score >= 70) return "Good";
+    if (score >= 50) return "Average";
+
+    return "Needs Improvement";
+}
+
+// Calculate all predictions
+students.forEach(student => {
+    student.predicted = calculatePrediction(student);
+    student.level = getPerformance(student.predicted);
+});
+
+// Student selection
+const select = document.getElementById("studentSelect");
+
+students.forEach(student => {
+
+    const option = document.createElement("option");
+
+    option.value = student.sno;
+    option.textContent = student.name;
+
+    select.appendChild(option);
+
+});
+
+// Show selected student's prediction
+function showPrediction(student) {
+
+    document.getElementById("previousMarks").textContent =
+        student.previous + "%";
+
+    document.getElementById("attendance").textContent =
+        student.attendance + "%";
+
+    document.getElementById("currentMarks").textContent =
+        student.current + "%";
+
+    document.getElementById("predictedMarks").textContent =
+        student.predicted.toFixed(2) + "%";
+
+    document.getElementById("performanceLevel").textContent =
+        student.level;
+
+    document.getElementById("individualTitle").textContent =
+        student.name + " - Actual vs Predicted Performance";
+
+    const chart = document.getElementById("individualChart");
+
+    chart.innerHTML = "";
+
+    const values = [
+        { label: "Actual Marks", value: student.current, color: "#49329a" },
+        { label: "Predicted Marks", value: student.predicted, color: "#9370db" }
+    ];
+
+    values.forEach(item => {
+
+        const barItem = document.createElement("div");
+        barItem.className = "bar-item";
+
+        barItem.innerHTML = `
+            <span class="bar-value">${item.value.toFixed(2)}%</span>
+            <div class="bar" style="
+                height:${item.value}%;
+                background:${item.color};
+            "></div>
+            <span class="bar-label">${item.label}</span>
+        `;
+
+        chart.appendChild(barItem);
+
+    });
+}
+
+select.addEventListener("change", () => {
+
+    const selected = students.find(
+        student => student.sno == select.value
+    );
+
+    showPrediction(selected);
+
+});
+
+// Prediction results table
+const predictionTable = document.getElementById("predictionTable");
+
+students.forEach(student => {
+
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+        <td>${student.sno}</td>
+        <td>${student.name}</td>
+        <td>${student.previous}%</td>
+        <td>${student.attendance}%</td>
+        <td>${student.current}%</td>
+        <td>${student.predicted.toFixed(2)}%</td>
+        <td>${student.level}</td>
+    `;
+
+    predictionTable.appendChild(row);
+
+});
+
+// Actual vs Predicted comparison chart
+const comparisonChart = document.getElementById("comparisonChart");
+
+students.forEach(student => {
+
+    const group = document.createElement("div");
+    group.className = "bar-item";
+
+    group.innerHTML = `
+        <span class="bar-value">${student.current}%</span>
+        <div style="display:flex; align-items:flex-end; justify-content:center; height:230px; width:100%; gap:5px;">
+            <div class="bar" title="Actual Marks"
+                 style="height:${student.current}%; background:#49329a;"></div>
+
+            <div class="bar" title="Predicted Marks"
+                 style="height:${student.predicted}%; background:#9370db;"></div>
+        </div>
+        <span class="bar-label">${student.name}</span>
+    `;
+
+    comparisonChart.appendChild(group);
+
+});
+
+// Performance distribution pie chart
+const counts = {
+    "Excellent": 0,
+    "Good": 0,
+    "Average": 0,
+    "Needs Improvement": 0
+};
+
+students.forEach(student => {
+    counts[student.level]++;
+});
+
+const total = students.length;
+
+const excellent = counts["Excellent"] / total * 100;
+const good = counts["Good"] / total * 100;
+const average = counts["Average"] / total * 100;
+const needs = counts["Needs Improvement"] / total * 100;
+
+const pie = document.getElementById("performancePie");
+
+pie.style.background = `
+    conic-gradient(
+        #49329a 0% ${excellent}%,
+        #7138a8 ${excellent}% ${excellent + good}%,
+        #9370db ${excellent + good}% ${excellent + good + average}%,
+        #c5b5ed ${excellent + good + average}% 100%
+    )
+`;
+
+const pieLegend = document.getElementById("pieLegend");
+
+const categories = [
+    { name: "Excellent", count: counts["Excellent"], color: "#49329a" },
+    { name: "Good", count: counts["Good"], color: "#7138a8" },
+    { name: "Average", count: counts["Average"], color: "#9370db" },
+    { name: "Needs Improvement", count: counts["Needs Improvement"], color: "#c5b5ed" }
+];
+
+categories.forEach(category => {
+
+    const item = document.createElement("div");
+    item.className = "legend-item";
+
+    item.innerHTML = `
+        <span class="legend-color" style="background:${category.color}"></span>
+        ${category.name} - ${category.count} Students
+    `;
+
+    pieLegend.appendChild(item);
+
+});
+
+// Initial prediction
+showPrediction(students[0]);
+
+</script></body>
+</html>

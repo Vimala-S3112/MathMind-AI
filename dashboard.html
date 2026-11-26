@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathMind AI - Home Dashboard</title>
+    <link rel="stylesheet" href="style.css"><style>
+    .dashboard {
+        max-width: 1150px;
+        margin: 35px auto;
+        padding: 20px;
+    }
+
+    .page-heading {
+        background: linear-gradient(120deg, #292b83, #7138a8);
+        color: white;
+        padding: 25px;
+        border-radius: 15px;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .back-button {
+        display: inline-block;
+        background: #49329a;
+        color: white;
+        padding: 12px 22px;
+        border-radius: 8px;
+        text-decoration: none;
+        margin-bottom: 25px;
+    }
+
+    .back-button:hover {
+        background: #7138a8;
+    }
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+
+    .stat-card {
+        background: white;
+        padding: 25px;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px #00000015;
+        border-bottom: 4px solid #7138a8;
+    }
+
+    .stat-card h3 {
+        color: #49329a;
+        margin-bottom: 12px;
+    }
+
+    .stat-card p {
+        font-size: 30px;
+        font-weight: bold;
+        color: #292b83;
+    }
+
+    .chart-container {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px #00000015;
+        margin-bottom: 25px;
+    }
+
+    .chart-container h3 {
+        color: #49329a;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .chart-area {
+        position: relative;
+        height: 350px;
+    }
+
+    /* Bar Chart */
+
+    .bar-chart {
+        height: 300px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-around;
+        border-left: 2px solid #999;
+        border-bottom: 2px solid #999;
+        padding: 10px 10px 0;
+        gap: 12px;
+    }
+
+    .bar-item {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .bar-value {
+        font-size: 13px;
+        font-weight: bold;
+        color: #292b83;
+        margin-bottom: 5px;
+    }
+
+    .bar {
+        width: 65%;
+        max-width: 65px;
+        min-height: 5px;
+        border-radius: 7px 7px 0 0;
+        background: linear-gradient(to top, #49329a, #9370db);
+    }
+
+    .bar-label {
+        font-size: 12px;
+        color: #49329a;
+        margin-top: 8px;
+        text-align: center;
+    }
+
+    /* Doughnut Chart */
+
+    .doughnut-area {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 260px;
+    }
+
+    .doughnut-chart {
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: conic-gradient(
+            #49329a 0% 42.86%,
+            #7138a8 42.86% 71.43%,
+            #9370db 71.43% 85.71%,
+            #c5b5ed 85.71% 100%
+        );
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .doughnut-center {
+        width: 115px;
+        height: 115px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: #49329a;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .chart-legend {
+        text-align: center;
+        line-height: 2;
+        margin-top: 10px;
+        color: #444;
+    }
+
+    .legend-color {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+        margin-left: 8px;
+    }
+
+    .color1 { background: #49329a; }
+    .color2 { background: #7138a8; }
+    .color3 { background: #9370db; }
+    .color4 { background: #c5b5ed; }
+
+    @media(max-width: 650px) {
+        .stats {
+            grid-template-columns: 1fr;
+        }
+
+        .bar-chart {
+            gap: 5px;
+        }
+
+        .bar-label {
+            font-size: 10px;
+        }
+
+        .bar-value {
+            font-size: 11px;
+        }
+    }
+</style>
+
+</head><body><header class="main-header">
+    <h1>🧠 MathMind AI</h1>
+    <p>Student Performance Prediction Website</p>
+</header><main class="dashboard"><a href="index.html" class="back-button">⬅ Back to Main Menu</a>
+
+<div class="page-heading">
+    <h2>🏠 Home Dashboard</h2>
+    <p>Overall Student Performance Overview</p>
+</div>
+
+<section class="stats">
+
+    <div class="stat-card">
+        <h3>Total Students</h3>
+        <p>7</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Average Marks</h3>
+        <p>78.29%</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Highest Marks</h3>
+        <p>92%</p>
+    </div>
+
+</section>
+
+<section class="chart-container">
+    <h3>📊 Student Performance Overview</h3>
+
+    <div class="chart-area">
+        <div class="bar-chart" id="marksChart"></div>
+    </div>
+</section>
+
+<section class="chart-container">
+    <h3>📈 Student Performance Distribution</h3>
+
+    <div class="chart-area">
+
+        <div class="doughnut-area">
+            <div class="doughnut-chart">
+                <div class="doughnut-center">
+                    7<br>Students
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-legend">
+            <span class="legend-color color1"></span> Excellent (3)
+            <span class="legend-color color2"></span> Good (2)
+            <span class="legend-color color3"></span> Average (1)
+            <span class="legend-color color4"></span> Needs Improvement (1)
+        </div>
+
+    </div>
+</section>
+
+</main><footer>
+    <p>© 2026 MathMind AI | Student Performance Prediction</p>
+</footer><script>
+
+    const studentNames = [
+        "Arun", "Bala", "Divya", "Kavi",
+        "Meena", "Priya", "Ravi"
+    ];
+
+    const marks = [85, 92, 68, 78, 55, 88, 72];
+
+    const colors = [
+        "#49329a",
+        "#7138a8",
+        "#8b65cf",
+        "#5b7cdb",
+        "#a18be0",
+        "#6545b5",
+        "#9370db"
+    ];
+
+    const chart = document.getElementById("marksChart");
+
+    studentNames.forEach((name, index) => {
+
+        const item = document.createElement("div");
+
+        item.className = "bar-item";
+
+        item.innerHTML = `
+            <div class="bar-value">${marks[index]}</div>
+
+            <div class="bar"
+                 style="height:${marks[index]}%;
+                        background:${colors[index]}">
+            </div>
+
+            <div class="bar-label">${name}</div>
+        `;
+
+        chart.appendChild(item);
+
+    });
+
+</script></body>
+</html>
